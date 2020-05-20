@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+
+    <!--CDN(jquery: 슬림버전은 UI 조작만 담겨있음. minified 받으면 됨)-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Ajax 연습</title>
+</head>
+
+<body>
+
+
+    <h1>Hello, world!</h1>
+    <button class="btn btn-primary" onclick="goAjax()">AJAX</button>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+
+    <script>
+        function goAjax() {
+
+            $.ajax({
+                type: "GET", // GET 방식으로 요청한다.
+                url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+                data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+                success: function (response) { // 서버에서 준 결과를 response라는 변수에 담음
+                    //console.log(response) // 서버에서 준 결과를 이용해서 나머지 코드를 작성
+                    //결과는 텍스트로 올 수도, json, xml 으로 올 수도 있음: but, json을 제일 많이 씀
+
+                    let dobong = response["RealtimeCityAir"]["row"][11];
+                    let gu_name = dobong['MSRSTE_NM'];
+                    let gu_mise = dobong['IDEX_MVL'];
+                    console.log(gu_name, gu_mise);
+                }
+            })
+
+        }
+    </script>
+
+
+</body>
+
+
+
+
+</html>
